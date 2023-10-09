@@ -13,7 +13,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.aarteaga.oauth.clients.UsuarioFeignClient;
 
-import brave.Tracer;
+//import brave.Tracer;
 import feign.FeignException;
 
 import com.aarteaga.commons.usuarios.models.entity.Usuario;
@@ -29,8 +29,8 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 	@Autowired
 	private UsuarioFeignClient client;
 	
-	@Autowired
-	private Tracer tracer;
+	//@Autowired
+	//private Tracer tracer;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,7 +51,7 @@ public class UsuarioService implements UserDetailsService, IUsuarioService {
 		} catch (FeignException e) {
 			String error = "Error en el login, no existe el usuario '" + username + "' en el sistema";
 			log.error(error);
-			tracer.currentSpan().tag("error.mensaje", error + ": " + e.getMessage());
+			//tracer.currentSpan().tag("error.mensaje", error + ": " + e.getMessage());
 			throw new UsernameNotFoundException(error);
 		}
 	}

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import com.aarteaga.oauth.services.IUsuarioService;
 
-import brave.Tracer;
+//import brave.Tracer;
 import feign.FeignException;
 
 import com.aarteaga.commons.usuarios.models.entity.Usuario;
@@ -25,8 +25,8 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 	@Autowired
 	private IUsuarioService usuarioService;
 	
-	@Autowired
-	private Tracer tracer;
+	/*@Autowired
+	private Tracer tracer;*/
 
 	@Override
 	public void publishAuthenticationSuccess(Authentication authentication) {
@@ -81,7 +81,7 @@ public class AuthenticationSuccessErrorHandler implements AuthenticationEventPub
 			}
 			
 			usuarioService.update(usuario, usuario.getId());
-			tracer.currentSpan().tag("error.mensaje", errors.toString());
+			//tracer.currentSpan().tag("error.mensaje", errors.toString());
 
 		} catch (FeignException e) {
 			log.error(String.format("El usuario %s no existe en el sistema", authentication.getName()));
